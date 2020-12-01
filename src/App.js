@@ -1,21 +1,26 @@
+import { useState } from "react";
 import { Modal } from "./components/Modal";
 import { ListOfImages } from "./components/ListOfImages";
+import { ImageContext } from "./image/ImageContext";
+
 
 import "./App.css";
-import { useState } from "react";
 
 function App() {
 
-  const [isOpen, setIsOpen] = useState({
-    open:true
-  })
+  const [state, setState] = useState({})
 
   return (
-    <div className="App">
-      {
-        isOpen ? <Modal setIsOpen={ setIsOpen } /> : <ListOfImages setIsOpen={ setIsOpen } />
-      }
-    </div>
+    <ImageContext.Provider value={{
+      setState,
+    }}>
+
+      <div className="App">
+        {
+          state ? <Modal /> : <ListOfImages />
+        }
+      </div>
+    </ImageContext.Provider>
   );
 }
 

@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ImageContext } from "../../image/ImageContext";
 
 import './style.css';
 
 
-export const ListOfImages = ({ setIsOpen }) => {
+export const ListOfImages = () => {
   const [image, setImage] = useState([]);
 
- 
+  const { setState } = useContext(ImageContext)
 
    const GetImage = async()=> {
      const url = `https://rickandmortyapi.com/api/character/`
      const resp = await fetch(url);
      const data = await resp.json();
      setImage(data.results);
-     console.log (data.results);
 
 
    }
    useEffect(() => {
     GetImage();
    
-  }, []);
+  }, []); 
 
   const handleClick = () => {
-    setIsOpen(open => open = true)
+    setState(state => state = true);
   }
 
    
